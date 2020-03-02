@@ -10,6 +10,6 @@ def get_exif_exiv2(imagepath):
         metadata = pyexiv2.ImageMetadata(imagepath)
         metadata.read()
         for key,values in metadata.items():
-            yield key,values.human_value
+            yield key,[values.name,values.description,values.human_value]
     except:
         pass

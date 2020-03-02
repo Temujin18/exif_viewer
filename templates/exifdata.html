@@ -18,16 +18,18 @@
       <table class="striped highlight centered responsive-table">
         <thead>
           <tr>
-              <th>EXIF Tag</th>
-              <th>Value</th>
+              <th><h5>EXIF Tag</h5></th>
+              <th><h5>Description</h5></th>
+              <th><h5>Value</h5></th>
           </tr>
         </thead>
 
         <tbody>
           {% for keys, values in exif_dict.items() %}
           <tr>
-          <td class="text-nowrap text-center">{{ keys }}</td>
-          <td class="text-left" style="word-break: break-all;" >{{ values }}</td>
+          <td class="text-nowrap text-center">{{ values[0] }}</td>
+          <td class="text-left">{{ values[1] }}</td>
+          <td class="text-left">{{ values[2] }}</td>
           </tr>
           {% endfor %}
         </tbody>

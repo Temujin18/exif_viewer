@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, flash
 from utils.exif_extractor import get_exif_exiv2
+import pyexiv2
 import os
+from contextlib import suppress
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -17,8 +19,8 @@ def get_exif():
             image = request.files["exif-image"]
             imagepath = os.path.join(app.config['UPLOAD_FOLDER'],'tmp.jpg')
             image.save(imagepath)
-            exif_data = {key:value for key, value in get_exif_exiv2(imagepath)}
-
+            with suppress(AttributeError):
+                exif_data = {key:values for key, values in get_exif_exiv2(imagepath)}
         if not exif_data:
             flash('{} has no EXIF data or is not a valid image file. '.format(image.filename))
         else:
